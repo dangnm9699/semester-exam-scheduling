@@ -21,5 +21,12 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.choco-solver</groupId>
+            <artifactId>choco-solver</artifactId>
+            <version>4.0.0.a</version>
+        </dependency>
+
     </dependencies>
 </project>
