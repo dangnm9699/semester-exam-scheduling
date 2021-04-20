@@ -48,14 +48,16 @@ public class ProblemSolver {
                 int s2 = Integer.parseInt(scanner.next());
                 p[i] = new Pair(s1 - 1, s2 - 1);
             }
-            System.out.println(N);
-            System.out.println(Arrays.toString(d));
-            System.out.println(M);
-            System.out.println(Arrays.toString(c));
-            System.out.println(K);
-            for (Pair pair : p) {
-                System.out.printf("(%2d,%2d)\n", pair.fi, pair.se);
-            }
+
+            //Print input data
+//            System.out.println(N);
+//            System.out.println(Arrays.toString(d));
+//            System.out.println(M);
+//            System.out.println(Arrays.toString(c));
+//            System.out.println(K);
+//            for (Pair pair : p) {
+//                System.out.printf("(%2d,%2d)\n", pair.fi, pair.se);
+//            }
         } catch (IOException ioException) {
             ioException.printStackTrace();
             System.exit(1);
