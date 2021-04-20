@@ -11,7 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.google.ortools:ortools-java:8.2.8710" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.ortools:ortools-linux-x86-64:8.2.8710" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.ortools:ortools-win32-x86-64:8.2.8710" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:5.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.15.3" level="project" />
