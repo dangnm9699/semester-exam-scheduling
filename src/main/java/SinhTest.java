@@ -32,7 +32,7 @@ public class SinhTest {
         m = n/5;
         k = getRandomNumber(n*(n-1)/20 ,n*(n-1)/15); //k is in range of 20-25% of n
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("./src/main/data/data2.txt", true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("./src/main/testsinh/data2.txt", true));
         writer.append(String.valueOf(n));
         writer.append('\n');
         for (int i = 0; i < n; i++) {
