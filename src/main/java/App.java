@@ -7,19 +7,19 @@ import implement.tuanbm.LinearSolver;
 public class App {
     public static void main(String[] args) {
         Loader.loadNativeLibraries();
-        String data = "/data1.txt";
+        String data = "/data2.txt";
 
         //Backtrack
-        BackTracking backTracking = new BackTracking(data);
-        backTracking.solve();
+//        BackTracking backTracking = new BackTracking(data);
+//        backTracking.solve();
 
         //Mix Integer Programming Google Or-tools
-        LinearSolver linearSolver = new LinearSolver(data);
-        linearSolver.solve();
+//        LinearSolver linearSolver = new LinearSolver(data);
+//        linearSolver.solve();
 
         //Constraint Programming Choco-Solver
-        CPSolverChoco cpSolver = new CPSolverChoco(data);
-        cpSolver.solve();
+//        CPSolverChoco cpSolver = new CPSolverChoco(data);
+//        cpSolver.solve();
 
         //Constraint Programming Google Or-tools
         CPSolverOrTools cpSolverOrTools = new CPSolverOrTools(data);

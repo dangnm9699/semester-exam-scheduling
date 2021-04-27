@@ -32,7 +32,7 @@ public class BackTracking extends ProblemSolver {
         long startTime = System.currentTimeMillis();
         dfs(0,0);
         long endTime = System.currentTimeMillis();
-        System.out.println("\nBacktracking time elapsed = "+(endTime - startTime)+" ms");
+        System.out.println("\nBacktracking duration = "+(endTime - startTime)+" ms");
         if (ans != Integer.MAX_VALUE) {
             System.out.println("Objective value = " + (ans+1));
             //TO-DO: print out assign subject to room

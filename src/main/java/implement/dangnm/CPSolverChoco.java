@@ -5,6 +5,8 @@ import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
 
+import java.util.Timer;
+
 
 /**
  * Constraint Programming Solver
@@ -29,6 +31,8 @@ public class CPSolverChoco extends ProblemSolver {
      *
      */
     public void solve() {
+        long startTime = System.currentTimeMillis();
+
         IntVar[] X = new IntVar[N];
         IntVar[][] Y = new IntVar[N][M];
 
@@ -72,8 +76,12 @@ public class CPSolverChoco extends ProblemSolver {
         }
 
         model.setObjective(Model.MINIMIZE, obj);
+
         Solver solver = model.getSolver();
         while (solver.solve()) {
+            long endTime = System.currentTimeMillis();
+            System.out.println("CPSolverChoco duration = "+ (endTime-startTime));
+
             System.out.println("[SOLUTION FOUND]");
             System.out.printf("Số kíp tối thiểu: %d\n", obj.getValue() + 1);
             for (int i = 0; i < N; i++) {

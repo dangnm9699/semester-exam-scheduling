@@ -145,7 +145,7 @@ public class LinearSolver extends ProblemSolver {
         final MPSolver.ResultStatus status = solver.solve();
 
         long endTime = System.currentTimeMillis();
-        System.out.println("\nMIP time elapsed = "+ (endTime - startTime)+" ms");
+        System.out.println("\nMIP Solver OrTools duration = "+ (endTime - startTime)+" ms");
 
         if (status == MPSolver.ResultStatus.OPTIMAL) {
             System.out.println("Objective value = "+ (obj.value()+1));

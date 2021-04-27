@@ -26,6 +26,8 @@ public class CPSolverOrTools extends ProblemSolver {
      *
      */
     public void solve() {
+        long startTime = System.currentTimeMillis();
+
         IntVar[] X = new IntVar[N];
         IntVar[][] Y = new IntVar[N][M];
 
@@ -72,6 +74,9 @@ public class CPSolverOrTools extends ProblemSolver {
         CpSolverStatus status = cpSolver.solve(cpModel);
 
         if (status == CpSolverStatus.OPTIMAL) {
+            long endTime = System.currentTimeMillis();
+            System.out.println("CPSolverOrTools duration = "+ (endTime-startTime));
+
             System.out.println("[SOLUTION FOUND]");
             System.out.printf("Số kíp tối thiểu: %d\n", cpSolver.value(obj) + 1);
             for (int i = 0; i < N; i++) {
