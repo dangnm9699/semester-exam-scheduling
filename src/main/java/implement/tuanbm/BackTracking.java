@@ -1,11 +1,15 @@
 package implement.tuanbm;
 
-import implement.ProblemSolver;
+import implement.XepLichThiSolverImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BackTracking extends ProblemSolver {
+/**
+ * Backtracking
+ * @author tuanbmhust
+ */
+public class BackTracking extends XepLichThiSolverImpl {
     ArrayList<Integer>[] cf;
     int assign[];
     int ans = Integer.MAX_VALUE;
@@ -26,6 +30,11 @@ public class BackTracking extends ProblemSolver {
 
         assign = new int[N];
         Arrays.fill(assign, -1);
+    }
+
+    @Override
+    public void printSolution() {
+
     }
 
     public void solve() {

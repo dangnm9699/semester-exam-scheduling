@@ -1,17 +1,16 @@
 package implement.tuanbm;
 
-import com.google.ortools.Loader;
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
-import implement.ProblemSolver;
+import implement.XepLichThiSolverImpl;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-public class LinearSolver extends ProblemSolver {
+/**
+ * Linear Solver
+ * @author tuanbmhust
+ */
+public class LinearSolver extends XepLichThiSolverImpl {
 
     MPSolver solver;
     MPVariable[][][] x;
@@ -20,45 +19,16 @@ public class LinearSolver extends ProblemSolver {
 
     static double nInf = Double.NEGATIVE_INFINITY;
 
-//    private void readFile(String filename) {
-//        try{
-//            File file = new File("data_sample/"+filename);
-//            Scanner scanner = new Scanner(file);
-//
-//            N = scanner.nextInt();
-//            d = new int[N];
-//            for (int i = 0; i < N; i++) {
-//                d[i] = scanner.nextInt();
-//            }
-//
-//            M = scanner.nextInt();
-//            c = new int[M];
-//            for (int i = 0; i < M; i++) {
-//                c[i] = scanner.nextInt();
-//            }
-//
-//            K = scanner.nextInt();
-//            cf1 = new int[K];
-//            cf2 = new int[K];
-//            for (int i = 0; i < K; i++) {
-//                int u = scanner.nextInt();
-//                int v = scanner.nextInt();
-//                u--;v--;
-//                cf1[i] = u;
-//                cf2[i] = v;
-//            }
-//
-//            scanner.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
     public LinearSolver(String dataResource){
         readData(dataResource);
     }
 
+    @Override
+    public void printSolution() {
+
+    }
+
+    @Override
     public void solve() {
         long startTime = System.currentTimeMillis();
 
