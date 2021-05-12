@@ -1,4 +1,4 @@
-package implement;
+package implement.common;
 
 public class Pair {
     public int fi;

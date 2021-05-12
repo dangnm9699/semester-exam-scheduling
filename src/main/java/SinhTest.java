@@ -1,10 +1,9 @@
-import implement.Pair;
+import implement.common.Pair;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SinhTest {
     int n,m,k,maxVal;
