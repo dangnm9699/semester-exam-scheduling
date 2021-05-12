@@ -4,13 +4,15 @@ import implement.common.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * @author dangnm
+ * @author dangnm9699
+ * @author tuanbmhust
  */
 
-public class ProblemSolver {
+public abstract class XepLichThiSolverImpl implements XepLichThiSolver {
     protected int N;
     protected int M;
     protected int K;
@@ -18,20 +20,19 @@ public class ProblemSolver {
     protected int[] c;
     protected Pair[] p;
 
-    /**
-     * This is constructor function
-     */
-    public ProblemSolver() {
-
-    }
+    protected long runtime;
 
     /**
-     * @param src path to data in resources directory
+     * @param input input data filename
+     *              path from source root (resources directory)
+     *              examples:
+     *              data.txt => /data.txt
+     *              directory/data.txt => /directory/data.txt
      */
-    protected void readData(String src) {
+    protected void readData(String input) {
         Scanner scanner;
         try {
-            scanner = new Scanner(new File(getClass().getResource(src).getFile()));
+            scanner = new Scanner(new File(Objects.requireNonNull(getClass().getResource(input)).getFile()));
             N = Integer.parseInt(scanner.next());
             d = new int[N];
             for (int i = 0; i < N; i++) {
@@ -50,7 +51,7 @@ public class ProblemSolver {
                 p[i] = new Pair(s1 - 1, s2 - 1);
             }
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            System.out.printf("[ERROR] %s is not file or directory\n", input);
             System.exit(1);
         }
     }
