@@ -33,21 +33,21 @@ public abstract class XepLichThiSolverImpl implements XepLichThiSolver {
         Scanner scanner;
         try {
             scanner = new Scanner(new File(Objects.requireNonNull(getClass().getResource(input)).getFile()));
-            N = Integer.parseInt(scanner.next());
+            N = scanner.nextInt();
             d = new int[N];
             for (int i = 0; i < N; i++) {
-                d[i] = Integer.parseInt(scanner.next());
+                d[i] = scanner.nextInt();
             }
-            M = Integer.parseInt(scanner.next());
+            M = scanner.nextInt();
             c = new int[M];
             for (int i = 0; i < M; i++) {
-                c[i] = Integer.parseInt(scanner.next());
+                c[i] = scanner.nextInt();
             }
-            K = Integer.parseInt(scanner.next());
+            K = scanner.nextInt();
             p = new Pair[K];
             for (int i = 0; i < K; i++) {
-                int s1 = Integer.parseInt(scanner.next());
-                int s2 = Integer.parseInt(scanner.next());
+                int s1 = scanner.nextInt();
+                int s2 = scanner.nextInt();
                 p[i] = new Pair(s1 - 1, s2 - 1);
             }
         } catch (IOException ioException) {
