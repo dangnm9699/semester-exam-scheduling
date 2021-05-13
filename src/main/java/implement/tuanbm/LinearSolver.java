@@ -34,7 +34,7 @@ public class LinearSolver extends XepLichThiSolverImpl {
 
         //Define variables
         x = new MPVariable[N][M][N];
-        solver = MPSolver.createSolver("CBC");
+        solver = MPSolver.createSolver("SCIP");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 for (int k = 0; k < N; k++) {
