@@ -48,7 +48,6 @@ public class LinearSolver extends XepLichThiSolverImpl {
         //Define constraints
         // 1st constraint: 2 mon conflict ko duoc xep cung 1 kip
         for (int cf = 0; cf < K; cf++) {
-//            int u = cf1[cf], v = cf2[cf];
             int u = p[cf].fi, v = p[cf].se;
             for (int k = 0; k < N; k++) {
                 MPConstraint constraint = solver.makeConstraint(0,1);
