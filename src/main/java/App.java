@@ -7,23 +7,11 @@ import implement.tuanbm.BackTracking;
 import implement.tuanbm.LinearSolver;
 
 public class App {
-    /**
-     * Data generator for {@link XepLichThiSolverImpl}
-     * @param output output filename
-     */
-    public static void dataGenerator(String output) {
-        //TODO: write data generator
-    }
-
-    /**
-     * Main
-     * @param args Command-line arguments
-     */
     public static void main(String[] args) {
         Loader.loadNativeLibraries();
 
-        int option = 1;
-        String data = "/data.txt";
+        int option = 3;
+        String data = "/data_40.txt";
         XepLichThiSolverImpl solver = null;
 
         switch (option) {

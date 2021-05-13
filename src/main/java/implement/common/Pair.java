@@ -8,4 +8,8 @@ public class Pair {
         this.fi = fi;
         this.se = se;
     }
+
+    public boolean equal(int fi, int se) {
+        return (this.fi == fi && this.se == se) || (this.fi == se && this.se == fi);
+    }
 }
