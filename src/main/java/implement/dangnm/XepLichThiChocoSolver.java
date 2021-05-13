@@ -14,7 +14,6 @@ import org.chocosolver.solver.variables.IntVar;
  */
 public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
     private final Model model;
-    private final int[] oneM;
     private final Solution solution;
     //Variables
     private IntVar[] X;
@@ -28,24 +27,20 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
         readData(data);
         model = new Model("Mini-project 8: Xep lich thi");
         solution = new Solution(model);
-        oneM = new int[M];
-        for (int i = 0; i < M; i++) {
-            oneM[i] = 1;
-        }
     }
 
     @Override
     public void printSolution() {
         System.out.printf("[RUNTIME]: %d (ms)\n[BEST SOLUTION FOUND]\n", runtime);
-        System.out.printf("Số kíp tối thiểu: %d\n", solution.getIntVal(objective) + 1);
+        System.out.printf("Số kíp tối thiểu: %d\n", solution.getIntVal(objective));
         for (int i = 0; i < N; i++) {
             int room = 0;
             for (int j = 0; j < M; j++)
                 if (solution.getIntVal(Y[i][j]) == 1) {
-                    room = j;
+                    room = j + 1;
                     break;
                 }
-            System.out.printf("Lớp thi %2d: Kíp %d, Phòng %d\n", i, solution.getIntVal(X[i]), room);
+            System.out.printf("Lớp thi %2d: Kíp %d, Phòng %d\n", i + 1, solution.getIntVal(X[i]), room);
         }
     }
 
@@ -68,7 +63,7 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
         Y = new IntVar[N][M];
 
         for (int i = 0; i < N; i++) {
-            X[i] = model.intVar("X[" + i + "]", 0, N - 1);
+            X[i] = model.intVar("X[" + i + "]", 1, N);
         }
 
         for (int i = 0; i < N; i++) {
@@ -85,7 +80,6 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
 
         for (int i = 0; i < K; i++) {
             model.arithm(X[p[i].fi], "!=", X[p[i].se]);
-            model.arithm(X[p[i].se], "!=", X[p[i].fi]);
         }
 
         for (int j = 0; j < M; j++) {
@@ -93,21 +87,19 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
                 for (int se = fi + 1; se < N; se++) {
                     model.ifThen(
                             model.arithm(X[fi], "=", X[se]),
-                            model.arithm(Y[fi][j], "+", Y[se][j], "<", 2)
+                            model.arithm(Y[fi][j], "+", Y[se][j], "<=", 1)
                     );
                 }
             }
         }
 
         for (int i = 0; i < N; i++) {
-            model.scalar(Y[i], oneM, "=", 1).post();
+            model.sum(Y[i], "=", 1).post();
         }
     }
 
     private void setupObjective() {
-        objective = model.intVar(0, N - 1);
-        for (int i = 0; i < N; i++) {
-            model.arithm(objective, ">=", X[i]).post();
-        }
+        objective = model.intVar(1, N);
+        model.max(objective, X).post();
     }
 }
