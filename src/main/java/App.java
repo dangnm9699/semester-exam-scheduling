@@ -22,8 +22,8 @@ public class App {
     public static void main(String[] args) {
         Loader.loadNativeLibraries();
 
-        int option = 1;
-        String data = "/data.txt";
+        int option = 4;
+        String data = "/data1.txt";
         XepLichThiSolverImpl solver = null;
 
         switch (option) {
