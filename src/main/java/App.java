@@ -1,8 +1,8 @@
 import com.google.ortools.Loader;
 import implement.XepLichThiSolverImpl;
-import implement.dangnm.XepLichThiCBLS;
-import implement.dangnm.XepLichThiChocoSolver;
-import implement.dangnm.XepLichThiOrTools;
+import implement.dangnm.CBLSTabu;
+import implement.dangnm.CPChocoSolver;
+import implement.dangnm.CPOrTools;
 import implement.tuanbm.BackTracking;
 import implement.tuanbm.LinearSolver;
 
@@ -28,10 +28,10 @@ public class App {
 
         switch (option) {
             case 0:
-                solver = new XepLichThiChocoSolver(data);
+                solver = new CPChocoSolver(data);
                 break;
             case 1:
-                solver = new XepLichThiOrTools(data);
+                solver = new CPOrTools(data);
                 break;
             case 2:
                 solver = new BackTracking(data);
@@ -40,7 +40,7 @@ public class App {
                 solver = new LinearSolver(data);
                 break;
             case 4:
-                solver = new XepLichThiCBLS(data);
+                solver = new CBLSTabu(data);
                 break;
             default:
                 System.out.println("Invalid option! Stop program");
