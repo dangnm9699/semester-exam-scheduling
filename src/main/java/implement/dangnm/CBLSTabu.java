@@ -10,7 +10,6 @@ import library.localsearch.functions.basic.FuncPlus;
 import library.localsearch.functions.max_min.Max;
 import library.localsearch.functions.sum.Sum;
 import library.localsearch.model.ConstraintSystem;
-import library.localsearch.model.IFunction;
 import library.localsearch.model.LocalSearchManager;
 import library.localsearch.model.VarIntLS;
 import library.localsearch.search.TabuSearch;
@@ -41,10 +40,10 @@ public class CBLSTabu extends XepLichThiSolverImpl {
             int room = 0;
             for (int j = 0; j < M; j++)
                 if (Y[i][j].getValue() == 1) {
-                    room = j + 1;
+                    room = j;
                     break;
                 }
-            System.out.printf("Lớp thi %2d: Kíp %d, Phòng %d\n", i + 1, X[i].getValue(), room);
+            System.out.printf("Lớp thi %2d: Kíp %d, Phòng %d\n", i + 1, X[i].getValue(), room + 1);
         }
     }
 
@@ -103,11 +102,9 @@ public class CBLSTabu extends XepLichThiSolverImpl {
         }
         //C4
         for (int i = 0; i < N; i++) {
-            IFunction[] c1 = new IFunction[M];
             for (int j = 0; j < M; j++) {
-                c1[j] = new FuncMult(Y[i][j], c[j]);
+                CS.post(new LessOrEqual(new FuncMult(Y[i][j], d[i]), c[j]));
             }
-            CS.post(new LessOrEqual(d[i], new Sum(c1)));
         }
         //Objective
         objective = new VarIntLS(mgr, 1, N);
