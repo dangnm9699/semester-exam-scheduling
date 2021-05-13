@@ -12,7 +12,7 @@ import org.chocosolver.solver.variables.IntVar;
  *
  * @author dangnm9699
  */
-public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
+public class CPChocoSolver extends XepLichThiSolverImpl {
     private final Model model;
     private final Solution solution;
     //Variables
@@ -23,7 +23,7 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
     /**
      * @param data Read {@link XepLichThiSolverImpl#readData(String)} for more information
      */
-    public XepLichThiChocoSolver(String data) {
+    public CPChocoSolver(String data) {
         readData(data);
         model = new Model("Mini-project 8: Xep lich thi");
         solution = new Solution(model);
@@ -74,14 +74,11 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
     }
 
     private void setupConstraint() {
-        for (int i = 0; i < N; i++) {
-            model.scalar(Y[i], c, ">=", d[i]).post();
-        }
-
+        //C1
         for (int i = 0; i < K; i++) {
             model.arithm(X[p[i].fi], "!=", X[p[i].se]);
         }
-
+        //C2
         for (int j = 0; j < M; j++) {
             for (int fi = 0; fi < N - 1; fi++) {
                 for (int se = fi + 1; se < N; se++) {
@@ -92,13 +89,18 @@ public class XepLichThiChocoSolver extends XepLichThiSolverImpl {
                 }
             }
         }
-
+        //C3
         for (int i = 0; i < N; i++) {
             model.sum(Y[i], "=", 1).post();
+        }
+        //C4
+        for (int i = 0; i < N; i++) {
+            model.scalar(Y[i], c, ">=", d[i]).post();
         }
     }
 
     private void setupObjective() {
+        //Objective
         objective = model.intVar(1, N);
         model.max(objective, X).post();
     }

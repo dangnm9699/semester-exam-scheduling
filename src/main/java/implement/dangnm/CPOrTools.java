@@ -6,7 +6,7 @@ import implement.XepLichThiSolverImpl;
 /**
  * Constraint Programming using Or-Tools
  */
-public class XepLichThiOrTools extends XepLichThiSolverImpl {
+public class CPOrTools extends XepLichThiSolverImpl {
     private final CpModel cpModel;
     private CpSolver solver;
     private CpSolverStatus status;
@@ -18,7 +18,7 @@ public class XepLichThiOrTools extends XepLichThiSolverImpl {
     /**
      * @param data Read {@link XepLichThiSolverImpl#readData(String)} for more information
      */
-    public XepLichThiOrTools(String data) {
+    public CPOrTools(String data) {
         readData(data);
         cpModel = new CpModel();
     }
@@ -69,31 +69,33 @@ public class XepLichThiOrTools extends XepLichThiSolverImpl {
     }
 
     private void setupConstraint() {
-        for (int i = 0; i < N; i++) {
-            cpModel.addGreaterOrEqual(LinearExpr.scalProd(Y[i], c), d[i]);
-        }
-
+        //C1
         for (int i = 0; i < K; i++) {
             cpModel.addDifferent(X[p[i].fi], X[p[i].se]);
         }
-
+        //C2
         for (int j = 0; j < M; j++) {
             for (int i1 = 0; i1 < N - 1; i1++) {
                 for (int i2 = i1 + 1; i2 < N; i2++) {
                     IntVar b = cpModel.newBoolVar("b[" + j + "][" + i1 + "][" + i2 + "]");
-                    cpModel.addLessOrEqual(LinearExpr.sum(new IntVar[]{Y[i1][j], Y[i2][j]}), 1).onlyEnforceIf(b);
+                    cpModel.addEquality(LinearExpr.sum(new IntVar[]{Y[i1][j], Y[i2][j]}), 1).onlyEnforceIf(b);
                     cpModel.addEquality(X[i1], X[i2]).onlyEnforceIf(b);
                     cpModel.addDifferent(X[i1], X[i2]).onlyEnforceIf(b.not());
                 }
             }
         }
-
+        //C3
         for (int i = 0; i < N; i++) {
             cpModel.addEquality(LinearExpr.sum(Y[i]), 1);
+        }
+        //C4
+        for (int i = 0; i < N; i++) {
+            cpModel.addGreaterOrEqual(LinearExpr.scalProd(Y[i], c), d[i]);
         }
     }
 
     private void setupObjective() {
+        //Objective
         objective = cpModel.newIntVar(1, N, "objective");
         cpModel.addMaxEquality(objective, X);
     }

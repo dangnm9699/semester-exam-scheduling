@@ -16,11 +16,11 @@ import library.localsearch.model.VarIntLS;
 import library.localsearch.search.TabuSearch;
 
 /**
- * Constraint based local search
+ * Constraint based local search with tabu search
  *
  * @author dangnm9699
  */
-public class XepLichThiCBLS extends XepLichThiSolverImpl {
+public class CBLSTabu extends XepLichThiSolverImpl {
     private VarIntLS[] X;
     private VarIntLS[][] Y;
     private VarIntLS objective;
@@ -29,7 +29,7 @@ public class XepLichThiCBLS extends XepLichThiSolverImpl {
     /**
      * @param data Read {@link XepLichThiSolverImpl#readData(String)} for more information
      */
-    public XepLichThiCBLS(String data) {
+    public CBLSTabu(String data) {
         readData(data);
     }
 
@@ -73,20 +73,12 @@ public class XepLichThiCBLS extends XepLichThiSolverImpl {
         }
         //Constraints
         CS = new ConstraintSystem(mgr);
-
-        for (int i = 0; i < N; i++) {
-            IFunction[] c1 = new IFunction[M];
-            for (int j = 0; j < M; j++) {
-                c1[j] = new FuncMult(Y[i][j], c[j]);
-            }
-            CS.post(new LessOrEqual(d[i], new Sum(c1)));
-        }
-
+        //C1
         for (int i = 0; i < K; i++) {
             CS.post(new NotEqual(X[p[i].fi], X[p[i].se]));
             CS.post(new NotEqual(X[p[i].se], X[p[i].fi]));
         }
-
+        //C2
         for (int j = 0; j < M; j++) {
             for (int fi = 0; fi < N - 1; fi++) {
                 for (int se = fi + 1; se < N; se++) {
@@ -102,14 +94,22 @@ public class XepLichThiCBLS extends XepLichThiSolverImpl {
                 }
             }
         }
-
+        //C3
         for (int i = 0; i < N; i++) {
             CS.post(new IsEqual(
                     new Sum(Y[i]),
                     1
             ));
         }
-
+        //C4
+        for (int i = 0; i < N; i++) {
+            IFunction[] c1 = new IFunction[M];
+            for (int j = 0; j < M; j++) {
+                c1[j] = new FuncMult(Y[i][j], c[j]);
+            }
+            CS.post(new LessOrEqual(d[i], new Sum(c1)));
+        }
+        //Objective
         objective = new VarIntLS(mgr, 1, N);
         CS.post(new IsEqual(new Max(X), objective));
 
