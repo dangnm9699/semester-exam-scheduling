@@ -62,7 +62,7 @@ public class LinearSolver extends XepLichThiSolverImpl {
             }
         }
 
-        // 2nd constraint: 1 mon chi duoc xep vao toi da 1 phong o 1 kip
+        // 2nd constraint: 1 mon chi duoc xep thi 1 lan duy nhat va tai 1 phong
         for (int i = 0; i < N; i++) {
             MPConstraint constraint = solver.makeConstraint(1,1);
             for (int k = 0; k < N; k++) {
