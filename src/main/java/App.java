@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) {
         Loader.loadNativeLibraries();
 
-        int option = 0;
+        int option = 2;
         String data = "/data_10.txt";
         XepLichThiSolverImpl solver = null;
 
