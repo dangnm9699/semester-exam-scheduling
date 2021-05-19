@@ -52,7 +52,6 @@ public class BackTracking extends XepLichThiSolverImpl {
         System.out.println("\nBacktracking duration = "+(endTime - startTime)+" ms");
         if (ans != Integer.MAX_VALUE) {
             System.out.println("Objective value = " + (ans+1));
-            //TO-DO: print out assign subject to room
         } else {
             System.out.println("No solution");
         }
@@ -71,25 +70,29 @@ public class BackTracking extends XepLichThiSolverImpl {
         }
         return true;
     }
-    private boolean checkDone() {
-        for (int i = 0; i < N; i++) {
-            if (assign[i] == -1){
-                return false;
-            }
-        }
-        return  true;
-    }
 
     private void dfs(int u, int kip) {
         if (u == N) {
             ans = Integer.min(ans, kip);
+            if (kip == 5) {
+                for (int i = 0; i <= kip; i++) {
+                    System.out.println("Kip "+i+":");
+                    for (int j = 0; j < M; j++) {
+                        System.out.print(room[i][j]);
+                        System.out.print(' ');
+                    }
+                    System.out.println();
+                }
+                System.out.println();
+            }
             return;
         }
+
         if(kip > ans) {
             return;
         }
 
-        for (int i = 0; i < M; i++) if (check(u,kip) && d[u]<c[i] && room[kip][i] == -1){
+        for (int i = 0; i < M; i++) if (check(u,kip) && d[u]<=c[i] && room[kip][i] == -1){
             assign[u] = kip;
             room[kip][i] = u;
             dfs(u+1,kip);
