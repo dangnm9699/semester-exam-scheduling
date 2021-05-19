@@ -74,17 +74,6 @@ public class BackTracking extends XepLichThiSolverImpl {
     private void dfs(int u, int kip) {
         if (u == N) {
             ans = Integer.min(ans, kip);
-            if (kip == 5) {
-                for (int i = 0; i <= kip; i++) {
-                    System.out.println("Kip "+i+":");
-                    for (int j = 0; j < M; j++) {
-                        System.out.print(room[i][j]);
-                        System.out.print(' ');
-                    }
-                    System.out.println();
-                }
-                System.out.println();
-            }
             return;
         }
 
@@ -92,32 +81,23 @@ public class BackTracking extends XepLichThiSolverImpl {
             return;
         }
 
-        for (int i = 0; i < M; i++) if (check(u,kip) && d[u]<=c[i] && room[kip][i] == -1){
-            assign[u] = kip;
-            room[kip][i] = u;
-            dfs(u+1,kip);
-            assign[u] = -1;
-            room[kip][i] = -1;
+        for (int i = 0; i < M; i++) if (room[kip][i] == -1){
+            for (int j = 0; j < N; j++) if (check(j,kip) && d[j]<=c[i]){
+                assign[j] = kip;
+                room[kip][i] = j;
+                dfs(u+1, kip);
+            }
         }
-        dfs(u,kip+1);
 
-//        int[] room = new int[M];
-//        Arrays.fill(room, -1);
-//        for (int i = 0; i < N; i++) if (check(i,kip)){
-//            for (int j = 0; j < M; j++) if (room[j] == -1 && d[i] <= c[j]){
-//                assign[i] = kip;
-//                room[j] = i;
-//            }
+//        for (int i = 0; i < M; i++) if (check(u,kip) && d[u]<=c[i] && room[kip][i] == -1){
+//            assign[u] = kip;
+//            room[kip][i] = u;
+//            dfs(u+1,kip);
+//            assign[u] = -1;
+//            room[kip][i] = -1;
 //        }
-//        dfs(kip+1);
-//        for (int i = 0; i < N; i++) if (assign[i] == kip){
-//            assign[i] = -1;
-//            for (int j = 0; j < M; j++) if (room[j] == i){
-//                room[j] = -1;
-//                break;
-//            }
-//            break;
-//        }
+
+        dfs(u,kip+1);
 
         return;
     }
