@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class DataGenerator {
     public static void main(String[] args) {
-        DataGenerator dataGenerator = new DataGenerator(40);
+        DataGenerator dataGenerator = new DataGenerator(30);
         try {
             dataGenerator.exec();
         } catch (IOException exception) {

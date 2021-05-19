@@ -84,7 +84,7 @@ public class CPChocoSolver extends XepLichThiSolverImpl {
                 for (int se = fi + 1; se < N; se++) {
                     model.ifThen(
                             model.arithm(X[fi], "=", X[se]),
-                            model.arithm(Y[fi][j], "+", Y[se][j], "<=", 1)
+                            model.arithm(Y[fi][j], "+", Y[se][j], "<", 2)
                     );
                 }
             }

@@ -78,7 +78,7 @@ public class CPOrTools extends XepLichThiSolverImpl {
             for (int i1 = 0; i1 < N - 1; i1++) {
                 for (int i2 = i1 + 1; i2 < N; i2++) {
                     IntVar b = cpModel.newBoolVar("b[" + j + "][" + i1 + "][" + i2 + "]");
-                    cpModel.addEquality(LinearExpr.sum(new IntVar[]{Y[i1][j], Y[i2][j]}), 1).onlyEnforceIf(b);
+                    cpModel.addLessThan(LinearExpr.sum(new IntVar[]{Y[i1][j], Y[i2][j]}), 2).onlyEnforceIf(b);
                     cpModel.addEquality(X[i1], X[i2]).onlyEnforceIf(b);
                     cpModel.addDifferent(X[i1], X[i2]).onlyEnforceIf(b.not());
                 }
