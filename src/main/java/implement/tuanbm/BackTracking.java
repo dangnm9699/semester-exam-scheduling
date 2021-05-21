@@ -58,7 +58,7 @@ public class BackTracking extends XepLichThiSolverImpl {
     }
 
     private boolean check(int u, int kip) {
-        if (assign[u] > 0) {
+        if (assign[u] >= 0) {
             return false;
         }
 
@@ -68,6 +68,7 @@ public class BackTracking extends XepLichThiSolverImpl {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -86,6 +87,8 @@ public class BackTracking extends XepLichThiSolverImpl {
                 assign[j] = kip;
                 room[kip][i] = j;
                 dfs(u+1, kip);
+                assign[j] = -1;
+                room[kip][i] = -1;
             }
         }
 
