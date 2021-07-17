@@ -1,6 +1,6 @@
 # Tối ưu lập kế hoạch
 **Học kỳ:** 20202 <br>
-**Topics:** Semester exam schedule <br>
+**Topics:** Semester exam scheduling <br>
 ## Đề bài
 ### Mô tả
 - Có ```N``` môn ```1,2,...,N``` cần được xếp lịch thi
